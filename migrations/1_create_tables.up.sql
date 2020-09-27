@@ -17,3 +17,4 @@ CREATE TABLE comments (
     post_id UUID NOT NULL REFERENCES posts (id) ON DELETE CASCADE,
     content TEXT NOT NULL,
     votes INT
+);
