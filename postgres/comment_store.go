@@ -12,10 +12,6 @@ type CommentStore struct {
 	*sqlx.DB
 }
 
-func NewCommentStore(db *sqlx.DB) *CommentStore {
-	return &CommentStore{DB: db}
-}
-
 func (s *CommentStore) Comment(id uuid.UUID) (miji.Comment, error) {
 	var c miji.Comment
 	if err := s.Get(&c, `SELECT * FROM comments WHERE id = $1`, id); err != nil {

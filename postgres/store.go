@@ -3,7 +3,6 @@ package postgres
 import (
 	"fmt"
 
-	"github.com/gocs/miji"
 	"github.com/jmoiron/sqlx"
 
 	// go inject the pq driver
@@ -11,9 +10,9 @@ import (
 )
 
 type Store struct {
-	miji.ThreadStore
-	miji.PostStore
-	miji.CommentStore
+	*ThreadStore
+	*PostStore
+	*CommentStore
 }
 
 func NewStore(dataSourceName string) (*Store, error) {
@@ -26,8 +25,8 @@ func NewStore(dataSourceName string) (*Store, error) {
 	}
 
 	return &Store{
-		ThreadStore:  NewThreadStore(db),
-		PostStore:    NewPostStore(db),
-		CommentStore: NewCommentStore(db),
+		ThreadStore:  &ThreadStore{DB: db},
+		PostStore:    &PostStore{DB: db},
+		CommentStore: &CommentStore{DB: db},
 	}, nil
 }

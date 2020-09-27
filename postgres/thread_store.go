@@ -12,10 +12,6 @@ type ThreadStore struct {
 	*sqlx.DB
 }
 
-func NewThreadStore(db *sqlx.DB) *ThreadStore {
-	return &ThreadStore{DB: db}
-}
-
 func (s *ThreadStore) Thread(id uuid.UUID) (miji.Thread, error) {
 	var t miji.Thread
 	if err := s.Get(&t, `SELECT * FROM threads WHERE id = $1`, id); err != nil {
@@ -53,7 +49,7 @@ func (s *ThreadStore) UpdateThread(t *miji.Thread) error {
 
 func (s *ThreadStore) DeleteThread(id uuid.UUID) error {
 	if _, err := s.Exec(`DELETE FROM threads WHERE id = $1`, id); err != nil {
-	return fmt.Errorf("error deleting thread: %W", err)
+		return fmt.Errorf("error deleting thread: %W", err)
 	}
 	return nil
 }
