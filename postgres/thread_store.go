@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	"github.com/gowebexamples/miji"
+	"github.com/gocs/miji"
 	"github.com/jmoiron/sqlx"
 )
 
