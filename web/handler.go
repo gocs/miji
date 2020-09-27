@@ -31,12 +31,10 @@ func NewHandler(store miji.Store) *Handler {
 
 const threadsListHTML = `
 <h1>Threads</h1>
-<dl>
-{{range .Threads}}
+<dl>{{range .Threads}}
 	<dt><strong>{{.Title}}</strong></dt>
-	<dt>{{.Description}}</dt>
-{{end}}
-</dl>
+	<dd>{{.Description}}</dd>
+{{end}}</dl>
 `
 
 func (h *Handler) ThreadsList() http.HandlerFunc {
@@ -44,7 +42,7 @@ func (h *Handler) ThreadsList() http.HandlerFunc {
 		Threads []miji.Thread
 	}
 
-	tmpl := template.Must(template.New("").Parse(``))
+	tmpl := template.Must(template.New("").Parse(threadsListHTML))
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		tt, err := h.store.Threads()
