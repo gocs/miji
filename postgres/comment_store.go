@@ -23,8 +23,7 @@ func (s *CommentStore) Comment(id uuid.UUID) (miji.Comment, error) {
 
 func (s *CommentStore) CommentsByPost(postID uuid.UUID) ([]miji.Comment, error) {
 	var cc []miji.Comment
-
-	if err := s.Select(&cc, `SELECT * FROM comments WHERE post_id = $1`, postID); err != nil {
+	if err := s.Select(&cc, `SELECT * FROM comments WHERE post_id = $1 ORDER BY votes DESC`, postID); err != nil {
 		return []miji.Comment{}, fmt.Errorf("error getting comments: %w", err)
 	}
 

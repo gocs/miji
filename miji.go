@@ -20,7 +20,7 @@ type Comment struct {
 	ID      uuid.UUID `db:"id"`
 	PostID  uuid.UUID `db:"post_id"`
 	Content string    `db:"content"`
-	Votes   int       `db:"vote"`
+	Votes   int       `db:"votes"`
 }
 
 type ThreadStore interface {
